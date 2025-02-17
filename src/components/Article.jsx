@@ -1,10 +1,11 @@
 import api from "../api";
 import { UserContext } from "./UserContext";
 import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
+import Error from "./Error";
 
 export default function Article() {
+    const [error, setError] = useState(true);
     const { user } = useContext(UserContext);
     const { id } = useParams();
     const [article, setArticle] = useState("");
@@ -14,6 +15,7 @@ export default function Article() {
     useEffect(() => {
         api.get(`articles/${id}`).then((response) => {
             setArticle(response.data);
+            setError(false);
         });
 
         api.get(`articles/${id}/comments`).then((response) => {
@@ -32,6 +34,8 @@ export default function Article() {
     function handleComment(e) {
         e.preventDefault();
         document.getElementById("commentButton").disabled = true;
+        document.getElementById("commentArea").value = "";
+
         api.post(`articles/${id}/comments`, {
             username: user,
             body: newComment,
@@ -52,7 +56,7 @@ export default function Article() {
         });
     }
 
-    return (
+    return !error ? (
         <div>
             <p>User: {user}</p>
             <h1>{article.title}</h1>
@@ -83,7 +87,7 @@ export default function Article() {
             <form onSubmit={(e) => handleComment(e)}>
                 <label htmlFor="comment">Comment:</label>
                 <textarea
-                    id="comment"
+                    id="commentArea"
                     name="comment"
                     rows="1"
                     cols="50"
@@ -102,5 +106,7 @@ export default function Article() {
             <Link to="/">Home</Link>
             <Link to={"/login"}>Login</Link>
         </div>
+    ) : (
+        <Error message="Article does not exist" />
     );
 }
