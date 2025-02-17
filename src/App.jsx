@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Article from "./components/Article";
@@ -12,6 +11,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="article/:id" element={<Article />} />
                     <Route path="login" element={<Login />} />
+                    <Route path="/:topic" element={<Home />} />
                 </Routes>
             </BrowserRouter>
         </UserProvider>
