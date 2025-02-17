@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import api from "../api";
 
 export default function Home() {
@@ -14,8 +15,12 @@ export default function Home() {
     return (
         <div>
             <h1>Articles</h1>
-            {articles.map((article) => {
-                return <p>{article.title}</p>;
+            {articles.map((article, index) => {
+                return (
+                    <div key={index}>
+                        <Link to={`article/${article.article_id}`}>{article.title}</Link>;
+                    </div>
+                );
             })}
         </div>
     );
