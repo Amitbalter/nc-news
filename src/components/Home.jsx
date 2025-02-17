@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import api from "../api";
+import { UserContext } from "./UserContext";
 
 export default function Home() {
+    const { user } = useContext(UserContext);
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
@@ -13,6 +15,7 @@ export default function Home() {
 
     return (
         <div>
+            <p>User: {user}</p>
             <h1>Articles</h1>
             {articles.map((article, index) => {
                 return (
@@ -21,6 +24,7 @@ export default function Home() {
                     </div>
                 );
             })}
+            <Link to={"login"}>Login</Link>
         </div>
     );
 }
