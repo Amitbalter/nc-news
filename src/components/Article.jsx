@@ -17,6 +17,14 @@ export default function Article() {
         });
     }, []);
 
+    function handleVote(vote) {
+        api.patch(`articles/${id}`, {
+            inc_votes: vote,
+        })
+            .then((response) => setArticle(response.data))
+            .catch((err) => window.alert(err));
+    }
+
     return (
         <div>
             <h1>{article.title}</h1>
@@ -30,6 +38,10 @@ export default function Article() {
                     </div>
                 );
             })}
+            <h1>Votes</h1>
+            <p>{article.votes}</p>
+            <button onClick={() => handleVote(1)}>Upvote</button>
+            <button onClick={() => handleVote(-1)}>Downvote</button>
         </div>
     );
 }
