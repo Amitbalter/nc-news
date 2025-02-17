@@ -16,7 +16,7 @@ export default function Login() {
 
     function handleUsername(e) {
         e.preventDefault();
-        const validUser = users.filter((user) => user === username);
+        const validUser = users.filter((user) => user === username)[0];
         setUser(validUser);
     }
 

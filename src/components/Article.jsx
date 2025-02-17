@@ -31,14 +31,25 @@ export default function Article() {
 
     function handleComment(e) {
         e.preventDefault();
+        document.getElementById("commentButton").disabled = true;
         api.post(`articles/${id}/comments`, {
             username: user,
             body: newComment,
         })
             .then((response) => {
                 setComments((comments) => [response.data, ...comments]);
+                document.getElementById("commentButton").disabled = false;
             })
             .catch(() => window.alert("Log in before making comment"));
+    }
+
+    function deleteComment(index) {
+        api.delete(`/comments/${comments[index].comment_id}`);
+        setComments((comments) => {
+            const copy = [...comments];
+            copy.splice(index, 1);
+            return copy;
+        });
     }
 
     return (
@@ -51,7 +62,21 @@ export default function Article() {
             {comments.map((comment, index) => {
                 return (
                     <div key={index}>
+                        <p>{comment.author}</p>
                         <p>{comment.body}</p>
+                        {user === comment.author ? (
+                            <button
+                                id="deleteCommentButton"
+                                onClick={() => {
+                                    deleteComment(index);
+                                }}
+                            >
+                                delete comment
+                            </button>
+                        ) : (
+                            <></>
+                        )}
+                        <br></br>
                     </div>
                 );
             })}
@@ -66,7 +91,9 @@ export default function Article() {
                         setNewComment(e.target.value);
                     }}
                 ></textarea>
-                <button type="submit">Post</button>
+                <button id="commentButton" type="submit">
+                    Post
+                </button>
             </form>
             <h1>Votes</h1>
             <p>{article.votes}</p>
