@@ -8,18 +8,24 @@ export default function Home() {
     const { user } = useContext(UserContext);
     const [articles, setArticles] = useState([]);
     const [topics, setTopics] = useState([]);
+    const [sort, setSort] = useState("created_at");
+    const [order, setOrder] = useState("DESC");
 
     useEffect(() => {
         api.get("/topics").then((response) => {
             setTopics(response.data);
         });
-        api.get("/articles").then((response) => {
+    }, []);
+
+    useEffect(() => {
+        api.get(`/articles?sort_by=${sort}&order=${order}`).then((response) => {
             setArticles(response.data.filter((article) => (topic ? article.topic === topic : true)));
         });
-    }, [topic]);
+    }, [topic, sort, order]);
 
     return (
         <div>
+            <p>User: {user}</p>
             <h1>Browse by Topic:</h1>
             {topics.map((topic, index) => {
                 return (
@@ -28,7 +34,16 @@ export default function Home() {
                     </div>
                 );
             })}
-            <p>User: {user}</p>
+            <label htmlFor="sort">Sort By:</label>
+            <select id="sort" name="sort" value={sort} onChange={(e) => setSort(e.target.value)}>
+                <option value="created_at">Date</option>
+                <option value="comment_count">Comment Count</option>
+                <option value="votes">Votes</option>
+            </select>
+            <select id="order" name="order" value={order} onChange={(e) => setOrder(e.target.value)}>
+                <option value="ASC">Ascending</option>
+                <option value="DESC">Descending</option>
+            </select>
             <h1>Articles</h1>
             {articles.map((article, index) => {
                 return (
