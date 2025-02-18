@@ -15,13 +15,14 @@ export default function Home() {
     const [order, setOrder] = useState("DESC");
 
     useEffect(() => {
-        api.get("/topics").then((response) => {
-            setTopics(response.data);
-            if (!topic || response.data.filter((t) => t.slug === topic).length !== 0) {
-                setError(false);
-                setIsLoading(false);
-            }
-        });
+        api.get("/topics")
+            .then((response) => {
+                setTopics(response.data);
+                if (!topic || response.data.filter((t) => t.slug === topic).length !== 0) {
+                    setError(false);
+                }
+            })
+            .finally(() => setIsLoading(false));
     }, []);
 
     useEffect(() => {

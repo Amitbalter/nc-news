@@ -5,6 +5,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import Error from "./Error";
 
 export default function Article() {
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(true);
     const { user } = useContext(UserContext);
     const { id } = useParams();
@@ -13,10 +14,12 @@ export default function Article() {
     const [newComment, setNewComment] = useState("");
 
     useEffect(() => {
-        api.get(`articles/${id}`).then((response) => {
-            setArticle(response.data);
-            setError(false);
-        });
+        api.get(`articles/${id}`)
+            .then((response) => {
+                setArticle(response.data);
+                setError(false);
+            })
+            .finally(() => setIsLoading(false));
 
         api.get(`articles/${id}/comments`).then((response) => {
             setComments(response.data);
@@ -56,7 +59,9 @@ export default function Article() {
         });
     }
 
-    return !error ? (
+    return isLoading ? (
+        <p>Page loading</p>
+    ) : !error ? (
         <div>
             <p>User: {user}</p>
             <h1>{article.title}</h1>

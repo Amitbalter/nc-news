@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 import api from "../api";
 
 export default function Login() {
+    const [isLoading, setIsLoading] = useState(true);
     const { user, setUser } = useContext(UserContext);
     const [username, setUsername] = useState("");
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        api.get("users").then((response) => {
-            setUsers(response.data.map((user) => user.username));
-        });
+        api.get("users")
+            .then((response) => {
+                setUsers(response.data.map((user) => user.username));
+            })
+            .finally(() => setIsLoading(false));
     }, []);
 
     function handleUsername(e) {
@@ -20,7 +23,9 @@ export default function Login() {
         setUser(validUser);
     }
 
-    return (
+    return isLoading ? (
+        <p>Page loading</p>
+    ) : (
         <>
             <p>User:{user}</p>
             <form onSubmit={(e) => handleUsername(e)}>
