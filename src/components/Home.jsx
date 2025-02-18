@@ -5,6 +5,7 @@ import { UserContext } from "./UserContext";
 import Error from "./Error";
 
 export default function Home() {
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(true);
     const { topic } = useParams();
     const { user } = useContext(UserContext);
@@ -16,21 +17,22 @@ export default function Home() {
     useEffect(() => {
         api.get("/topics").then((response) => {
             setTopics(response.data);
-            console.log(response.data.filter((t) => t.slug === topic));
             if (!topic || response.data.filter((t) => t.slug === topic).length !== 0) {
                 setError(false);
+                setIsLoading(false);
             }
         });
     }, []);
 
     useEffect(() => {
-        // console.log(topics);
         api.get(`/articles?sort_by=${sort}&order=${order}`).then((response) => {
             setArticles(response.data.filter((article) => (topic ? article.topic === topic : true)));
         });
     }, [topic, sort, order]);
 
-    return !error ? (
+    return isLoading ? (
+        <p>Page Loading</p>
+    ) : !error ? (
         <div>
             <p>User: {user}</p>
             <h1>Browse by Topic:</h1>
