@@ -1,0 +1,91 @@
+.article,
+.comments {
+    width: 1000px;
+    font-size: large;
+    background-color: rgba(87, 143, 202, 0.8);
+    margin: auto;
+    padding: 1%;
+    border-radius: 1%;
+    margin-bottom: 30px;
+    overflow-wrap: anywhere;
+}
+
+.votes {
+    display: flex;
+    margin: auto;
+    justify-content: space-evenly;
+    width: 500px;
+    height: 60px;
+    margin-bottom: 30px;
+}
+
+.vote {
+    background-color: rgba(87, 143, 202, 0.8);
+    border: none;
+    border-radius: 3%;
+    aspect-ratio: 1;
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+}
+
+.vote:hover,
+.deleteButton:hover {
+    background-color: rgba(87, 143, 202);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.voteCount {
+    background-color: rgba(87, 143, 202, 0.8);
+    border: none;
+    aspect-ratio: 1;
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+}
+
+.buttonPic {
+    max-width: 100%;
+    aspect-ratio: 1;
+    justify-self: center;
+}
+
+.comment {
+    display: grid;
+    grid-template-columns: 4fr 20fr 1fr;
+    justify-content: space-between;
+    column-gap: 20px;
+}
+
+.deleteButton {
+    background-color: rgba(87, 143, 202, 0.8);
+    border: none;
+    aspect-ratio: 1;
+    border-radius: 30%;
+    width: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.deleteImage {
+    max-width: 100%;
+    aspect-ratio: 1;
+    justify-self: center;
+}
+
+.input {
+    font-size: large;
+    background-color: rgba(87, 143, 202, 0.8);
+    border: none;
+    resize: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

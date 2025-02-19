@@ -2,6 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import { UserContext } from "./UserContext";
 import { Link } from "react-router-dom";
 import api from "../api";
+import Header from "./Header";
+import classes from "./Login.module.css";
+import { login } from "../assets/images";
 
 export default function Login() {
     const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +22,7 @@ export default function Login() {
 
     function handleUsername(e) {
         e.preventDefault();
+        document.getElementById("username").value = "";
         const validUser = users.filter((user) => user === username)[0];
         setUser(validUser);
     }
@@ -27,15 +31,14 @@ export default function Login() {
         <p>Page loading</p>
     ) : (
         <>
-            <p>User:{user}</p>
-            <form onSubmit={(e) => handleUsername(e)}>
-                <label>
-                    Username:
-                    <input type="text" name="username" onChange={(e) => setUsername(e.target.value)} />
-                </label>
-                <button type="submit">submit</button>
+            <Header />
+            <form onSubmit={(e) => handleUsername(e)} className={classes.login}>
+                <label>Enter your username:</label>
+                <input type="text" id="username" name="username" onChange={(e) => setUsername(e.target.value)} className={classes.input} />
+                <button type="submit" className={classes.submit}>
+                    <img src={login} className={classes.submitImg}></img>
+                </button>
             </form>
-            <Link to="/">Home</Link>
         </>
     );
 }

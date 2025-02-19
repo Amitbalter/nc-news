@@ -3,6 +3,10 @@ import { UserContext } from "./UserContext";
 import { useEffect, useState, useContext } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import Error from "./Error";
+import Header from "./Header";
+import PageLoading from "./PageLoading";
+import classes from "./Article.module.css";
+import * as images from "../assets/images";
 
 export default function Article() {
     const [isLoading, setIsLoading] = useState(true);
@@ -60,56 +64,69 @@ export default function Article() {
     }
 
     return isLoading ? (
-        <p>Page loading</p>
+        <PageLoading />
     ) : !error ? (
         <div>
-            <p>User: {user}</p>
-            <h1>{article.title}</h1>
-            <p>{article.author}</p>
-            <p>{article.body}</p>
-            <h1>Comments</h1>
-            {comments.map((comment, index) => {
-                return (
-                    <div key={index}>
-                        <p>{comment.author}</p>
-                        <p>{comment.body}</p>
-                        {user === comment.author ? (
-                            <button
-                                id="deleteCommentButton"
-                                onClick={() => {
-                                    deleteComment(index);
-                                }}
-                            >
-                                delete comment
-                            </button>
-                        ) : (
-                            <></>
-                        )}
-                        <br></br>
-                    </div>
-                );
-            })}
-            <form onSubmit={(e) => handleComment(e)}>
-                <label htmlFor="comment">Comment:</label>
-                <textarea
-                    id="commentArea"
-                    name="comment"
-                    rows="1"
-                    cols="50"
-                    onChange={(e) => {
-                        setNewComment(e.target.value);
-                    }}
-                ></textarea>
-                <button id="commentButton" type="submit">
-                    Post
+            <Header />
+            <h1 style={{ textAlign: "center" }}>{article.title}</h1>
+            <h2 style={{ textAlign: "center" }}>By {article.author}</h2>
+            <div className={classes.article}>{article.body}</div>
+            <div className={classes.votes}>
+                <button onClick={() => handleVote(-1)} className={classes.vote}>
+                    <img src={images.thumbsDown} className={classes.buttonPic}></img>
                 </button>
-            </form>
-            <h1>Votes</h1>
-            <p>{article.votes}</p>
-            <button onClick={() => handleVote(1)}>Upvote</button>
-            <button onClick={() => handleVote(-1)}>Downvote</button>
-            <Link to="/">Home</Link>
-            <Link to={"/login"}>Login</Link>
+                <div className={classes.voteCount}>
+                    <p>{article.votes}</p>
+                </div>
+                <button onClick={() => handleVote(1)} className={classes.vote}>
+                    <img src={images.thumbsUp} className={classes.buttonPic}></img>
+                </button>
+            </div>
+            <div className={classes.comments}>
+                <h1 style={{ textAlign: "center" }}>Comments</h1>
+                {comments.map((comment, index) => {
+                    return (
+                        <div key={index} className={classes.comment}>
+                            <p>{comment.author}</p>
+                            <p className={classes.body}>{comment.body}</p>
+                            {user === comment.author ? (
+                                <button
+                                    id="deleteCommentButton"
+                                    onClick={() => {
+                                        deleteComment(index);
+                                    }}
+                                    className={classes.deleteButton}
+                                >
+                                    <img src={images.delete} className={classes.deleteImage}></img>
+                                </button>
+                            ) : (
+                                <></>
+                            )}
+                            <br></br>
+                        </div>
+                    );
+                })}
+                {user ? (
+                    <form onSubmit={(e) => handleComment(e)} className={classes.comment}>
+                        <label htmlFor="comment">{user}:</label>
+                        <textarea
+                            id="commentArea"
+                            name="comment"
+                            rows="4"
+                            cols="50"
+                            onChange={(e) => {
+                                setNewComment(e.target.value);
+                            }}
+                            className={classes.input}
+                        ></textarea>
+                        <button id="commentButton" type="submit" className={classes.deleteButton}>
+                            <img src={images.send} className={classes.deleteImage}></img>
+                        </button>
+                    </form>
+                ) : (
+                    <></>
+                )}
+            </div>
         </div>
     ) : (
         <Error message="Article does not exist" />

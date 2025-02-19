@@ -1,0 +1,40 @@
+.login {
+    padding-top: 200px;
+    margin: auto;
+    width: 1000px;
+    /* height: 20px; */
+    font-size: xx-large;
+    display: grid;
+    grid-template-columns: 6fr 10fr 1fr;
+    column-gap: 1%;
+}
+
+.input {
+    height: 100%;
+    border: none;
+    background-color: rgba(87, 143, 202, 0.8);
+    font-size: xx-large;
+}
+
+.submit {
+    background-color: rgba(87, 143, 202, 0.8);
+    max-height: 100%;
+    border: none;
+    aspect-ratio: 1;
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit:hover {
+    background-color: rgba(87, 143, 202);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.submitImg {
+    width: 100%;
+    aspect-ratio: 1;
+    justify-self: center;
+}

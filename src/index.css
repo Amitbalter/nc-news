@@ -1,3 +1,8 @@
-* {
+body {
     margin: 0;
+    background-color: rgba(161, 227, 249, 0.336);
+}
+
+* {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
