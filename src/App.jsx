@@ -4,6 +4,8 @@ import Home from "./components/Home";
 import Article from "./components/Article";
 import Login from "./components/Login";
 import Error from "./components/Error";
+import "./variables.css";
+
 function App() {
     return (
         <UserProvider>

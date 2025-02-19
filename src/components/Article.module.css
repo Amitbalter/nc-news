@@ -2,12 +2,24 @@
 .comments {
     width: 1000px;
     font-size: large;
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
     margin: auto;
     padding: 1%;
     border-radius: 1%;
     margin-bottom: 30px;
     overflow-wrap: anywhere;
+}
+
+.imageContainer {
+    margin: auto;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.image {
+    margin: auto;
+    padding: auto;
+    justify-self: center;
 }
 
 .votes {
@@ -20,7 +32,7 @@
 }
 
 .vote {
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
     border: none;
     border-radius: 3%;
     aspect-ratio: 1;
@@ -33,13 +45,13 @@
 
 .vote:hover,
 .deleteButton:hover {
-    background-color: rgba(87, 143, 202);
+    background-color: var(--dark-blue);
     transform: scale(1.05);
     cursor: pointer;
 }
 
 .voteCount {
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
     border: none;
     aspect-ratio: 1;
     border-radius: 30%;
@@ -63,7 +75,7 @@
 }
 
 .deleteButton {
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
     border: none;
     aspect-ratio: 1;
     border-radius: 30%;
@@ -81,7 +93,7 @@
 
 .input {
     font-size: large;
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
     border: none;
     resize: none;
 }

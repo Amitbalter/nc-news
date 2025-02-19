@@ -22,12 +22,16 @@ export default function Article() {
             .then((response) => {
                 setArticle(response.data);
                 setError(false);
+                document.body.style.backgroundImage = `url(${response.data.article_img_url})`;
             })
             .finally(() => setIsLoading(false));
 
         api.get(`articles/${id}/comments`).then((response) => {
             setComments(response.data);
         });
+        return () => {
+            document.body.style.backgroundImage = "";
+        };
     }, []);
 
     function handleVote(vote) {
@@ -68,20 +72,22 @@ export default function Article() {
     ) : !error ? (
         <div>
             <Header />
-            <h1 style={{ textAlign: "center" }}>{article.title}</h1>
-            <h2 style={{ textAlign: "center" }}>By {article.author}</h2>
-            <div className={classes.article}>{article.body}</div>
-            <div className={classes.votes}>
-                <button onClick={() => handleVote(-1)} className={classes.vote}>
-                    <img src={images.thumbsDown} className={classes.buttonPic}></img>
-                </button>
-                <div className={classes.voteCount}>
-                    <p>{article.votes}</p>
+            <div className={classes.article}>
+                <h1 style={{ textAlign: "center" }}>{article.title}</h1>
+                <h2 style={{ textAlign: "center" }}>By {article.author}</h2>
+                <div className={classes.votes}>
+                    <button onClick={() => handleVote(-1)} className={classes.vote}>
+                        <img src={images.thumbsDown} className={classes.buttonPic}></img>
+                    </button>
+                    <div className={classes.voteCount}>
+                        <p>{article.votes}</p>
+                    </div>
+                    <button onClick={() => handleVote(1)} className={classes.vote}>
+                        <img src={images.thumbsUp} className={classes.buttonPic}></img>
+                    </button>
                 </div>
-                <button onClick={() => handleVote(1)} className={classes.vote}>
-                    <img src={images.thumbsUp} className={classes.buttonPic}></img>
-                </button>
             </div>
+            <div className={classes.article}>{article.body}</div>
             <div className={classes.comments}>
                 <h1 style={{ textAlign: "center" }}>Comments</h1>
                 {comments.map((comment, index) => {

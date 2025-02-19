@@ -2,7 +2,6 @@
     padding-top: 200px;
     margin: auto;
     width: 1000px;
-    /* height: 20px; */
     font-size: xx-large;
     display: grid;
     grid-template-columns: 6fr 10fr 1fr;
@@ -12,12 +11,12 @@
 .input {
     height: 100%;
     border: none;
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
     font-size: xx-large;
 }
 
 .submit {
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
     max-height: 100%;
     border: none;
     aspect-ratio: 1;
@@ -28,7 +27,7 @@
 }
 
 .submit:hover {
-    background-color: rgba(87, 143, 202);
+    background-color: var(--dark-blue);
     transform: scale(1.05);
     cursor: pointer;
 }

@@ -1,6 +1,6 @@
 .Header {
     display: flex;
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
     height: 80px;
     text-align: center;
     margin-bottom: 50px;
@@ -19,5 +19,5 @@
 }
 
 .headerLink:hover {
-    background-color: rgba(87, 143, 202);
+    background-color: var(--dark-blue);
 }

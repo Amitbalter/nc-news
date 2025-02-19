@@ -8,7 +8,7 @@
     margin: 10%;
     text-decoration: none;
     border: 3px solid black;
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
 
     border-radius: 5%;
 
@@ -19,7 +19,7 @@
 }
 
 .article:hover {
-    background-color: rgb(87, 143, 202);
+    background-color: var(--dark-blue);
     transform: scale(1.02);
 }
 
@@ -45,7 +45,7 @@
 
 .topic {
     flex: 1;
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
     margin: 0% 5%;
     text-decoration: none;
     color: black;
@@ -58,7 +58,7 @@
 }
 
 .topic:hover {
-    background-color: rgb(87, 143, 202);
+    background-color: var(--dark-blue);
     transform: scale(1.02);
 }
 
@@ -71,11 +71,9 @@
     flex: 1;
     font-size: x-large;
     padding: 1em 1.5em;
-    background-color: rgba(87, 143, 202, 0.8);
+    background-color: var(--light-blue);
 
     border: 0;
     margin: 0% 20%;
     border-radius: 1%;
-
-    /* appearance: none; */
 }

@@ -1,6 +1,10 @@
 body {
     margin: 0;
     background-color: rgba(161, 227, 249, 0.336);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 * {
