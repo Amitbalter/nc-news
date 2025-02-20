@@ -10,3 +10,13 @@ body {
 * {
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
+
+h1,
+h2 {
+    text-align: center;
+}
+
+select:hover,
+button:hover {
+    cursor: pointer;
+}

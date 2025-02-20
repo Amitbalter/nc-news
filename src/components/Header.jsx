@@ -7,7 +7,7 @@ export default function Header() {
     const { user, setUser } = useContext(UserContext);
     return (
         <div className={classes.Header}>
-            <Link to="/" className={classes.headerLink}>
+            <Link to={"/"} className={classes.headerLink}>
                 Home
             </Link>
             <Link to={"/login"} className={classes.headerLink}>

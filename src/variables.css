@@ -1,4 +1,5 @@
 :root {
-    --dark-blue: rgba(87, 143, 202);
-    --light-blue: rgba(87, 143, 202, 0.9);
+    --dark-blue-hover: rgba(87, 143, 202);
+    --dark-blue: rgba(87, 143, 202, 0.9);
+    --light-blue: rgba(161, 227, 249, 0.336);
 }

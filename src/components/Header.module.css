@@ -1,6 +1,6 @@
 .Header {
     display: flex;
-    background-color: var(--light-blue);
+    background-color: var(--dark-blue);
     height: 80px;
     text-align: center;
     margin-bottom: 50px;
@@ -19,5 +19,5 @@
 }
 
 .headerLink:hover {
-    background-color: var(--dark-blue);
+    background-color: var(--dark-blue-hover);
 }

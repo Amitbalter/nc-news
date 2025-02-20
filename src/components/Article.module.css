@@ -1,103 +1,85 @@
 .article,
 .comments {
-    width: 1000px;
-    font-size: large;
-    background-color: var(--light-blue);
+    width: min(80%, 1000px);
     margin: auto;
-    padding: 1%;
-    border-radius: 1%;
+    font-size: large;
+    background-color: var(--dark-blue);
+    padding: 2%;
+    border-radius: 10px;
     margin-bottom: 30px;
     overflow-wrap: anywhere;
-}
-
-.imageContainer {
-    margin: auto;
-    display: flex;
-    margin-bottom: 20px;
-}
-
-.image {
-    margin: auto;
-    padding: auto;
-    justify-self: center;
 }
 
 .votes {
     display: flex;
     margin: auto;
     justify-content: space-evenly;
-    width: 500px;
+    width: min(70%, 500px);
     height: 60px;
-    margin-bottom: 30px;
+    justify-self: center;
 }
 
-.vote {
-    background-color: var(--light-blue);
+.voteButton,
+.commentButton,
+.voteCount {
+    background-color: var(--dark-blue);
     border: none;
-    border-radius: 3%;
     aspect-ratio: 1;
     border-radius: 30%;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: xx-large;
-}
-
-.vote:hover,
-.deleteButton:hover {
-    background-color: var(--dark-blue);
-    transform: scale(1.05);
-    cursor: pointer;
 }
 
 .voteCount {
-    background-color: var(--light-blue);
-    border: none;
-    aspect-ratio: 1;
-    border-radius: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: xx-large;
 }
 
-.buttonPic {
+.commentButton {
+    width: 40px;
+}
+
+.voteButton:hover,
+.commentButton:hover {
+    background-color: var(--dark-blue-hover);
+    transform: scale(1.05);
+}
+
+.voteImage,
+.commentImage {
     max-width: 100%;
     aspect-ratio: 1;
     justify-self: center;
 }
 
-.comment {
+.comment,
+.inputComment {
+    max-width: 100%;
     display: grid;
-    grid-template-columns: 4fr 20fr 1fr;
+    grid-template-columns: 130px minmax(100px, 20fr) minmax(50px, 1fr);
     justify-content: space-between;
     column-gap: 20px;
 }
 
-.deleteButton {
-    background-color: var(--light-blue);
-    border: none;
-    aspect-ratio: 1;
-    border-radius: 30%;
-    width: 40px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.deleteImage {
-    max-width: 100%;
-    aspect-ratio: 1;
-    justify-self: center;
+.inputComment {
+    margin-bottom: 20px;
 }
 
 .input {
     font-size: large;
-    background-color: var(--light-blue);
+    background-color: var(--dark-blue);
     border: none;
     resize: none;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+.commentBody,
+.commentAuthor {
+    margin-top: 0;
+    margin-bottom: 30px;
 }

@@ -3,7 +3,6 @@ import { UserProvider } from "./components/UserContext";
 import Home from "./components/Home";
 import Article from "./components/Article";
 import Login from "./components/Login";
-import Error from "./components/Error";
 import "./variables.css";
 
 function App() {
@@ -14,8 +13,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="article/:id" element={<Article />} />
                     <Route path="login" element={<Login />} />
-                    <Route path="/:topic" element={<Home />} />
-                    <Route path="*" element={<Error message="This page does not exist" />} />
+                    <Route path="*" element={<h1>This page does not exist</h1>} />
                 </Routes>
             </BrowserRouter>
         </UserProvider>
