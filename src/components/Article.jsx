@@ -31,14 +31,9 @@ export default function Article() {
     }, []);
 
     function handleVote(vote) {
-        document.getElementById("thumbsUp").disabled = true;
-        document.getElementById("thumbsDown").disabled = true;
+        setVotes((votes) => votes + vote);
         api.patch(`articles/${id}`, {
             inc_votes: vote,
-        }).then(() => {
-            setVotes((votes) => votes + vote);
-            document.getElementById("thumbsUp").disabled = false;
-            document.getElementById("thumbsDown").disabled = false;
         });
     }
 
