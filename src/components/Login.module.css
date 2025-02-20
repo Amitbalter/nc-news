@@ -1,8 +1,8 @@
 .login {
-    margin: 200px auto;
     padding: 30px;
     background-color: var(--dark-blue);
-    width: 1000px;
+    width: min(80%, 1000px);
+    margin: 200px auto;
     border-radius: 15px;
     align-items: center;
     font-size: xx-large;
@@ -10,8 +10,8 @@
 
 .form {
     display: grid;
-    grid-template-columns: 6fr 12fr 1fr;
-    column-gap: 1%;
+    grid-template-columns: auto minmax(0, 12fr) 50px;
+    column-gap: 3%;
     align-items: center;
 }
 
@@ -27,6 +27,7 @@
     background-color: var(--dark-blue-hover);
     font-size: xx-large;
     border-radius: 10px;
+    /* margin-right: 10px; */
 }
 
 .submit {

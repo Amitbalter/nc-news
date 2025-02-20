@@ -37,7 +37,7 @@ export default function Login() {
             ) : (
                 <div className={classes.login}>
                     <form onSubmit={(e) => handleUsername(e)} className={classes.form}>
-                        <label>Enter your username:</label>
+                        <label>Username:</label>
                         <input
                             type="text"
                             id="username"

@@ -55,15 +55,14 @@
 
 .comment,
 .inputComment {
-    max-width: 100%;
     display: grid;
-    grid-template-columns: 130px minmax(100px, 20fr) minmax(50px, 1fr);
+    grid-template-columns: 130px minmax(0, 20fr) 1fr;
     justify-content: space-between;
     column-gap: 20px;
 }
 
 .inputComment {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .input {
