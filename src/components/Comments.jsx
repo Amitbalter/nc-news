@@ -20,13 +20,17 @@ export default function Comments({ id }) {
     function handleComment(e) {
         e.preventDefault();
         if (newComment) {
+            setComments((comments) => [{ author: user, body: newComment }, ...comments]);
             document.getElementById("commentButton").disabled = true;
             document.getElementById("input").value = "";
             api.post(`articles/${id}/comments`, {
                 username: user,
                 body: newComment,
             }).then((response) => {
-                setComments((comments) => [response.data, ...comments]);
+                setComments((comments) => {
+                    comments[0] = response.data;
+                    return comments;
+                });
                 setNewComment("");
                 document.getElementById("commentButton").disabled = false;
             });
@@ -34,6 +38,7 @@ export default function Comments({ id }) {
     }
 
     function deleteComment(index) {
+        console.log();
         api.delete(`/comments/${comments[index].comment_id}`);
         setComments((comments) => {
             const copy = [...comments];
@@ -73,7 +78,7 @@ export default function Comments({ id }) {
                             <li key={index} className={classes.comment}>
                                 <p className={classes.commentAuthor}>{comment.author}</p>
                                 <p className={classes.commentBody}>{comment.body}</p>
-                                {user === comment.author ? (
+                                {user === comment.author && comment.comment_id ? (
                                     <button
                                         id="deleteCommentButton"
                                         onClick={() => {
