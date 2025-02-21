@@ -78,13 +78,14 @@ export default function Comments({ id }) {
                             <li key={index} className={classes.comment}>
                                 <p className={classes.commentAuthor}>{comment.author}</p>
                                 <p className={classes.commentBody}>{comment.body}</p>
-                                {user === comment.author && comment.comment_id ? (
+                                {user === comment.author ? (
                                     <button
                                         id="deleteCommentButton"
                                         onClick={() => {
                                             deleteComment(index);
                                         }}
                                         className={classes.commentButton}
+                                        disabled={comment.comment_id ? false : true}
                                     >
                                         <img src={images.delete} className={classes.commentImage}></img>
                                     </button>
