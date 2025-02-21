@@ -8,6 +8,7 @@ import { login } from "../assets/images";
 
 export default function Login() {
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(false);
     const { user, setUser } = useContext(UserContext);
     const [username, setUsername] = useState("");
     const [users, setUsers] = useState([]);
@@ -18,6 +19,7 @@ export default function Login() {
             .then((response) => {
                 setUsers(response.data.map((user) => user.username));
             })
+            .catch(() => setError(true))
             .finally(() => setIsLoading(false));
     }, []);
 
@@ -34,6 +36,8 @@ export default function Login() {
             <Header />
             {isLoading ? (
                 <h1>Page Loading...</h1>
+            ) : error ? (
+                <h1>No connection to server</h1>
             ) : (
                 <div className={classes.login}>
                     <form onSubmit={(e) => handleUsername(e)} className={classes.form}>

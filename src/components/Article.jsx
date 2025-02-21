@@ -19,10 +19,13 @@ export default function Article() {
         api.get(`articles/${id}`)
             .then((response) => {
                 setArticle(response.data);
-                document.body.style.backgroundImage = `url(${response.data.article_img_url})`;
                 setVotes(response.data.votes);
+                document.body.style.backgroundImage = `url(${response.data.article_img_url})`;
             })
-            .catch(() => setError(true))
+            .catch((err) => {
+                if (err.response) setError(err.response.data.msg);
+                else setError("No connection to server");
+            })
             .finally(() => setArticleLoading(false));
 
         return () => {
@@ -44,7 +47,9 @@ export default function Article() {
                 <div className={classes.article}>
                     <h1>Article loading...</h1>
                 </div>
-            ) : !error ? (
+            ) : error ? (
+                <h1>{error}</h1>
+            ) : (
                 <div>
                     <div className={classes.article}>
                         <h1>{article.title}</h1>
@@ -72,8 +77,6 @@ export default function Article() {
                     <div className={classes.article}>{article.body}</div>
                     <Comments id={id} />
                 </div>
-            ) : (
-                <h1>Article does not exist</h1>
             )}
         </>
     );
