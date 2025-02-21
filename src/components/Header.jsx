@@ -11,7 +11,7 @@ export default function Header() {
                 Home
             </Link>
             <Link to={"/login"} className={classes.headerLink}>
-                {!user ? <p>Log In</p> : <p className={classes.headerLink}>Logged in as {user}</p>}
+                {!user ? <p>Log In</p> : <p>Logged in as {user}</p>}
             </Link>
         </div>
     );

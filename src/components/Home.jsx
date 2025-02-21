@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import api from "../api";
 import Header from "./Header";
 import classes from "./Home.module.css";
@@ -9,29 +9,61 @@ export default function Home() {
     const sort = searchParams.get("sort") || "created_at";
     const order = searchParams.get("order") || "DESC";
     const topic = searchParams.get("topic") || "all";
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(false);
+
     const [articles, setArticles] = useState([]);
+    const [allArticles, setAllArticles] = useState([]);
     const [topics, setTopics] = useState([]);
 
-    useEffect(() => {
-        api.get("/topics").then((response) => {
-            setTopics(response.data);
-            setIsLoading(false);
-        });
-    }, []);
+    const [topicsLoading, setTopicsLoading] = useState(true);
+    const [topicsError, setTopicsError] = useState(false);
+
+    const [articlesLoading, setArticlesLoading] = useState(true);
+    const [articlesError, setArticlesError] = useState(false);
 
     useEffect(() => {
+        api.get("/topics")
+            .then((response) => {
+                setTopics(response.data);
+            })
+            .catch(() => {
+                setTopicsError(true);
+            })
+            .finally(() => {
+                setTopicsLoading(false);
+            });
+
+        api.get("/articles").then((response) => {
+            const copyArticles = response.data.map((article) => {
+                article.created_at = Date.parse(article.created_at);
+                return article;
+            });
+            setAllArticles(copyArticles);
+        });
+
         let url = `/articles?sort_by=${sort}&order=${order}`;
         if (topic !== "all") url += `&topic=${topic}`;
         api.get(url)
             .then((response) => {
                 setArticles(response.data);
-                setError(false);
             })
             .catch(() => {
-                setError(true);
+                setArticlesError(true);
+            })
+            .finally(() => {
+                setArticlesLoading(false);
             });
+    }, []);
+
+    useEffect(() => {
+        if (searchParams.size === 0) {
+            setArticlesError(false);
+        }
+        const sign = order === "ASC" ? 1 : -1;
+        setArticles(() => {
+            const copyArticles = [...allArticles];
+            copyArticles.sort((a1, a2) => sign * (a1[sort] - a2[sort]));
+            return copyArticles.filter((article) => (topic === "all" ? true : article.topic === topic));
+        });
     }, [topic, sort, order]);
 
     function changeSearchParams(param, value) {
@@ -46,13 +78,17 @@ export default function Home() {
 
     return (
         <>
-            {isLoading ? (
+            {topicsLoading ? (
                 <h1>Page loading...</h1>
             ) : (
                 <>
                     <Header />
-                    {error ? (
-                        <h1>{"There are no such topics or search options"} </h1>
+                    {topicsError ? (
+                        <h1>No connection to server</h1>
+                    ) : articlesLoading ? (
+                        <h1>Articles Loading...</h1>
+                    ) : articlesError ? (
+                        <h1>Invalid topic or search option</h1>
                     ) : (
                         <>
                             <div className={classes.topics}>
