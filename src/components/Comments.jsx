@@ -38,7 +38,6 @@ export default function Comments({ id }) {
     }
 
     function deleteComment(index) {
-        console.log();
         api.delete(`/comments/${comments[index].comment_id}`);
         setComments((comments) => {
             const copy = [...comments];
